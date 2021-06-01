@@ -1,0 +1,32 @@
+#INITIAL SETTINGS
+training_data_name: datasets/CCDC.txt
+inference_data_name: inference.txt
+train_size: 90000
+
+
+#model parameters
+model_names:
+  - checkpoints/CCDC.pth        #if list contains more than one, it's bootstrap
+hidden_size: 128
+num_layers: 4
+bidirect: True
+
+
+#training parameters
+BATCH_SIZE: 256
+val_BATCH_SIZE: 1024
+learning_rate: 0.003
+num_epochs: 500
+sched_step: 10
+sched_gamma: 0.9
+weight_decay: 0
+folds: 1                         #number of bootstraps
+file_name: DATASET_
+tokens_dict_name: dicts/CCDC.pickle    #dictionary of tokens and OHE vectors
+
+
+#inference parameters
+TTA_number: 30                   #number of test time augmentations
+inference_BATCH_SIZE: 2000
+
+

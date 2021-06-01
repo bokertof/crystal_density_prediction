@@ -1,21 +1,27 @@
-import torch, random, dill
+import torch, random, dill, yaml, os
 import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
 from torch.nn.utils.rnn import pack_sequence
 from model import *
 
 
+def load_config(config_name):
+    with open(config_name) as file:
+        config = yaml.safe_load(file)
+
+    return config
+
 
 def save_dict(SMILES, filename):
     
-    with open(filename + ".pickle", "wb") as file:
+    with open(filename, "wb") as file:
         dill.dump(SMILES, file)
 
 
         
 def load_dict(filename):
 
-    with open(filename + ".pickle", "rb") as file:
+    with open(filename, "rb") as file:
          return dill.load(file)
 
 
@@ -98,8 +104,8 @@ class DENSDataset(Dataset):
 
 
 
-def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, num_epochs, device, fold, input_size, hidden_size,
-               num_layers, bidirect = True, file_name = 'DATASET_', learning_rate = 0.001, sched_step = 10, sched_gamma = 0.9):
+def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, val_BATCH_SIZE, num_epochs, device, fold, input_size, hidden_size,
+               num_layers, bidirect = True, file_name = 'DATASET_', learning_rate = 0.001, sched_step = 10, sched_gamma = 0.9, weight_decay = 0):
 
 
     model = RNN(input_size, input_size, hidden_size, num_layers, bidirect).to(device)
@@ -110,7 +116,7 @@ def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, num_epochs, devic
 
 
     criterion = nn.L1Loss(reduction = 'sum')
-    optimizer = optim.Adam(model.parameters(), learning_rate, weight_decay=0) 
+    optimizer = optim.Adam(model.parameters(), learning_rate, weight_decay=weight_decay) 
     scheduler = optim.lr_scheduler.StepLR(optimizer, sched_step, sched_gamma)
 
 
@@ -134,7 +140,7 @@ def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, num_epochs, devic
                                   collate_fn = train_prep_data.collate_fn)
     
     val_dataloader = DataLoader(val_prep_data, 
-                                  batch_size = 1024,
+                                  batch_size = val_BATCH_SIZE,
                                   shuffle = True,
                                   collate_fn = val_prep_data.collate_fn)
 
