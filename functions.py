@@ -1,7 +1,9 @@
 import torch, random, dill, yaml, os
 import torch.optim as optim
-from model import *
-from data_structures import *
+import torch.nn as nn
+from torch.utils.data import DataLoader
+from model import RNN
+from data_structures import DENSDataset
 
 def load_config(config_name):
     with open(config_name) as file:
@@ -24,7 +26,7 @@ def load_dict(filename):
 
 
 
-def train_NN(model, dataset, optimizer, criterion, length, clip = 50):
+def train_NN(model, dataset, optimizer, criterion, length, device, clip = 50):
     
         loss_sum = 0
         model.train()
@@ -48,7 +50,7 @@ def train_NN(model, dataset, optimizer, criterion, length, clip = 50):
 
 
 
-def evaluate(model, dataset, criterion, length):
+def evaluate(model, dataset, criterion, length, device):
 
     with torch.no_grad():
         model.eval()
@@ -114,10 +116,10 @@ def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, val_BATCH_SIZE, n
     
     for epoch in range(1, num_epochs+1):
         
-        train_loss = train_NN(model, train_dataloader, optimizer, criterion, len(train_dataset))
-        val_loss = evaluate(model, val_dataloader, criterion, len(val_dataset))
+        train_loss = train_NN(model, train_dataloader, optimizer, criterion, len(train_dataset), device)
+        val_loss = evaluate(model, val_dataloader, criterion, len(val_dataset), device)
 
-        print(f"| EPOCH Ã¢â€žâ€“{epoch:3.0f} | TRAIN LOSS {train_loss:.5f} | EVAL LOSS {val_loss:.5f} |")
+        print(f"| EPOCH {epoch:3.0f} | TRAIN LOSS {train_loss:.5f} | EVAL LOSS {val_loss:.5f} |")
 
         scheduler.step()
         losses.append(str(train_loss) + '     ' +str(val_loss))

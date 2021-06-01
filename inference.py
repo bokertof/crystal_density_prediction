@@ -1,7 +1,7 @@
 from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
-import torch
+import torch, rdkit
 from torch.utils.data import DataLoader
 
 
@@ -26,13 +26,13 @@ input_size = embedd_size = len(SMILES.vocab.stoi.items())
 
 
 dataset_smiles = infDENSDataset(data_smiles, SMILES)
+
 dataloader = DataLoader(dataset_smiles, 
                         batch_size=config["inference_BATCH_SIZE"],
                         shuffle=False,
                         collate_fn=dataset_smiles.collate_fn)
 
 
-     
         
 aver_preds = torch.zeros(len(data_smiles), 1)
 for checkpoint in config["model_names"]:

@@ -1,7 +1,7 @@
 from random import choice
 from torchtext import data
-from functions import *
-
+from functions import load_config, train_fold, save_dict
+import torch
 
 
 

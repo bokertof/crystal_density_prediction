@@ -2,6 +2,7 @@ from tokenizer import ChemTokenizer
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pack_sequence
 import torch
+from random import choice
 
 
 class DENSDataset(Dataset):
@@ -23,7 +24,7 @@ class DENSDataset(Dataset):
 
     def __getitem__(self, idx):
 
-        src = random.choice(self.corpus[idx])
+        src = choice(self.corpus[idx])
         self.src = [self.sos] + src + [self.eos]
 
         return ([self.SMILES.vocab.stoi[i] for i in src], self.dens[idx]) 
