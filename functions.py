@@ -87,8 +87,8 @@ def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, val_BATCH_SIZE, n
 
 
 
-    pretrained_embeddings = SMILES.vocab.vectors
-    model.embedding.weight.data = pretrained_embeddings.to(device)
+    OHE_vectors = SMILES.vocab.vectors
+    model.embedding.weight.data = OHE_vectors.to(device)
     model.embedding.weight.requires_grad = False
     
 
