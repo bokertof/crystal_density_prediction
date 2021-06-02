@@ -19,9 +19,6 @@ with open(config["inference_data_name"],'r') as file:
     data_smiles = [line.strip() for line in file.readlines()]
 
 
-
-
-
 input_size = embedd_size = len(SMILES.vocab.stoi.items())
 
 
@@ -37,7 +34,7 @@ dataloader = DataLoader(dataset_smiles,
 aver_preds = torch.zeros(len(data_smiles), 1)
 for checkpoint in config["model_names"]:
     
-    model = RNN(input_size, embedd_size, config["hidden_size"], config["num_layers"], config["bidirect"]).to(device)
+    model = RNN(input_size, embedd_size, config["hidden_size"], config["num_layers"], device, config["bidirect"]).to(device)
     model.load_state_dict(torch.load(checkpoint)['state_dict'])
     print(checkpoint.split('/')[-1], ' successfuly loaded')
 
@@ -55,8 +52,6 @@ for checkpoint in config["model_names"]:
 
 
 aver_preds /= (len(config["model_names"])*(config["TTA_number"]))
-
-
 
 
 print(aver_preds.squeeze().tolist())
