@@ -74,7 +74,7 @@ def train_fold(train_dataset, val_dataset, SMILES, BATCH_SIZE, val_BATCH_SIZE, n
                num_layers, bidirect = True, file_name = 'DATASET_', learning_rate = 0.001, sched_step = 10, sched_gamma = 0.9, weight_decay = 0):
 
 
-    model = RNN(input_size, input_size, hidden_size, num_layers, bidirect).to(device)
+    model = RNN(input_size, input_size, hidden_size, num_layers, device, bidirect).to(device)
 
     print(model)
     total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
