@@ -30,8 +30,8 @@ SMILES.build_vocab([i[0][0] for i in train_dataset])
 
 
 size = len(SMILES.vocab.stoi.items())
-vectors = torch.eye(size)
-SMILES.vocab.set_vectors(SMILES.vocab.stoi, vectors, size)
+OHE_vectors = torch.eye(size)
+SMILES.vocab.set_vectors(SMILES.vocab.stoi, OHE_vectors, size)
 
 
 
