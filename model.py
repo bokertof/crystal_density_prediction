@@ -2,14 +2,13 @@ import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import PackedSequence
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 
 class RNN(nn.Module):
-    def __init__(self, input_size, embedd_size, hidden_size, num_layers, bidirect = False):
+    def __init__(self, input_size, embedd_size, hidden_size, num_layers, device, bidirect = False):
         super(RNN, self).__init__()
-
+        
+        self.device = device
         self.hidden_size = hidden_size
         self.num_layers = num_layers
 
@@ -28,8 +27,8 @@ class RNN(nn.Module):
 
         temp = PackedSequence(embedd,
                             x.batch_sizes,
-                            sorted_indices=x.sorted_indices.to(device),
-                            unsorted_indices=x.unsorted_indices.to(device))
+                            sorted_indices=x.sorted_indices.to(self.device),
+                            unsorted_indices=x.unsorted_indices.to(self.device))
 
         _, h_gru = self.RNN(temp)
         
