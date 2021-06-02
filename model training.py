@@ -19,7 +19,6 @@ with open(config["training_data_name"],'r') as file:
 
 
 
-
 train_dataset = dens_data[:config["train_size"]]
 val_dataset = dens_data[config["train_size"]:]
 
@@ -36,9 +35,7 @@ SMILES.vocab.set_vectors(SMILES.vocab.stoi, vectors, size)
 
 
 
-
 save_dict(SMILES, config["tokens_dict_name"])
-
 
 
 
