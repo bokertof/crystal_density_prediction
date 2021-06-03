@@ -1,4 +1,4 @@
-name: my-rdkit-env
+name: density
 channels:
   - pytorch
   - conda-forge
