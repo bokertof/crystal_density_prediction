@@ -40,14 +40,10 @@ class infDENSDataset(Dataset):
     def __init__(self, data, SMILES):
 
         self.corpus = data
+        self.SMILES = SMILES
         
         self.sos = '<sos>'
         self.eos = '<eos>'
-
-        self.SMILES = SMILES
-        
-        self.tokenizer = ChemTokenizer()
-
         
     def __len__(self):
             
@@ -56,8 +52,8 @@ class infDENSDataset(Dataset):
     def __getitem__(self, idx):
 
         src = self.corpus[idx]
-        random_SMILES = self.tokenizer.randomize([src], 1, 1)[0]
-        random_SMILES_tkn = self.tokenizer.tokenize(random_SMILES)[0]
+        random_SMILES = ChemTokenizer.randomize([src], 1, 1)[0]
+        random_SMILES_tkn = ChemTokenizer.tokenize(random_SMILES)[0]
         prep_SMILES = [self.sos] + random_SMILES_tkn + [self.eos]
 
         return [self.SMILES.vocab.stoi[i] for i in prep_SMILES]
