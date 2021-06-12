@@ -151,4 +151,3 @@ dependencies:
   - zstd=1.5.0=h6255e5f_0
   - pip:
     - pillow==6.2.2
-prefix: C:\Users\Stanislav\Anaconda3\envs\my-rdkit-env
