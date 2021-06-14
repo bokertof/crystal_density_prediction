@@ -1,4 +1,4 @@
-# crystal_density
+# Crystal density prediction based on randomized SMILES representations with test-time augmentation technique
 
 This repository contains models and related files for crystal density prediction problem.
 
