@@ -1,5 +1,6 @@
   - streamlit
-  - -f https://data.pyg.org/whl/torch-1.1.0+cpu.html
+  - -f https://data.pyg.org/whl/torch-1.13.0+cpu.html 
+  - torch-scatter
   - _r-mutex=1.0.1=anacondar_1
   - blas=1.0=mkl
   - boost=1.74.0=py37h3b38789_3
@@ -144,6 +145,7 @@
   - zipp=3.4.1=pyhd8ed1ab_0
   - zlib=1.2.11=h62dcd97_1010
   - zstd=1.5.0=h6255e5f_0
+
 
 
 
