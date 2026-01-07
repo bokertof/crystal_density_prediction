@@ -1,7 +1,8 @@
 streamlit
 pyyaml
-rdkit==2021.03.2
+rdkit
 torch==1.1.0
+
 
 
 
