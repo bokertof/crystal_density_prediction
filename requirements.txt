@@ -1,6 +1,7 @@
 streamlit
-yaml
+pyyaml
 rdkit==2021.03.2
 torch==1.1.0
+
 
 
