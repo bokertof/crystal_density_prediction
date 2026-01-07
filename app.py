@@ -12,14 +12,23 @@ SMILES = load_dict(config["tokens_dict_name"])
 
 input_size = embedd_size = len(SMILES.vocab.stoi.items())
 
-models = []
-for checkpoint in config["model_names"]:
-    model = RNN(input_size, embedd_size, config["hidden_size"], config["num_layers"],
-                device, config["bidirect"]).to(device)
-    model.load_state_dict(torch.load(checkpoint, map_location=device)['state_dict'])
-    model.eval()
-    models.append(model)
-    print(checkpoint.split('/')[-1], ' loaded')
+@st.cache_resource
+def load_models():
+    models = []
+    for checkpoint in config["model_names"]:
+        model = RNN(
+            input_size, embedd_size,
+            config["hidden_size"], config["num_layers"],
+            device, config["bidirect"]
+        ).to(device)
+        model.load_state_dict(
+            torch.load(checkpoint, map_location=device)['state_dict']
+        )
+        model.eval()
+        models.append(model)
+    return models
+
+models = load_models()
 
 
 st.title("Crystal Density Predictor")
