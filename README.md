@@ -40,6 +40,17 @@ For additional testing, we used three smaller literature datasets: Huang & Massa
 
 **Paired density vs SMILES length distributions for CCDC dataset.**
 
+ <img width="693" height="458" alt="image" src="https://github.com/user-attachments/assets/63a2b2c5-802b-43d1-bf3e-f4a47a7ab529" />
+
+**Violin plots of paired Tanimoto similarity distributions among 2,000 random picked samples over 4 selected datasets. For Rice, Huang&Massa and Mathieu datasets all molecules were used for calculations.*
+
+# Model
+Molecules were converted into canonical and randomized SMILES using RDKit, without standardization, to assess model performance under realistic conditions. Up to 30 randomized SMILES per molecule were generated. Special tokens <sos>, and <eos> were added, and SMILES were one-hot encoded into sparse matrices (size: 111 for CCDC, 33 for CCDC CHNO, 22 for Casey) using a pack_sequence approach to save memory.
+
+Matrices were fed into a 4-layer bidirectional GRU (hidden size = 128), with the final hidden states concatenated and passed through a feedforward layer to predict crystal density. Training used 256-sized mini-batches for 500 epochs (250 for canonical SMILES) with Adam optimizer (lr = 0.003, weight decay = 0) and gradient clipping (norm = 50). The learning rate decayed by 0.9 every 10 (5 for canonical) epochs.
+
+During inference, test-time augmentation (TTA) averaged predictions over 30 randomized SMILES per molecule. Bootstrap experiments were performed by resampling datasets of equal size for ensemble evaluation.
+
 # Estimation of the Lowest Possible Error
 It is well known that a single molecule can crystallize in multiple polymorphic forms with different packing arrangements and symmetries, which generally leads to different crystal densities. As a result, crystal density cannot be predicted with arbitrarily high precision. To assess the intrinsic lower bound of prediction accuracy, we analyzed density variations among polymorphs extracted from the Cambridge Structural Database (CCDC).
 By identifying structures with identical canonical SMILES but reduced lattice parameters differing by more than 1.5%, we estimated the irreducible uncertainty arising from polymorphism. The resulting mean and median density differences (~0.02–0.03 g cm⁻³) are comparable to the “excellent” accuracy threshold proposed by Kim et al. and to the best errors reported by state-of-the-art methods. This suggests that mean absolute errors in this range are close to the fundamental limit for crystal density prediction.
