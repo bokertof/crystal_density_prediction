@@ -1,6 +1,6 @@
 streamlit
-numpy==1.20.3
-yaml==0.2.5
+yaml
 rdkit==2021.03.2
 torch==1.1.0
+
 
