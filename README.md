@@ -1,6 +1,6 @@
-[![Version](https://img.shields.io/github/v/release/bokertof/crystal_density_prediction)](https://github.com/bokertof/crystal_density_prediction/releases)
+[![Version](https://img.shields.io/github/v/release/bokertof/crystal_density_prediction?color=orange)](https://github.com/bokertof/crystal_density_prediction/releases)
 [![Python](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/github/license/bokertof/crystal_density_prediction)](LICENSE)
+[![License](https://img.shields.io/github/license/bokertof/crystal_density_prediction?color=green)](LICENSE)
 
 # Crystal Density Prediction Using a GRU-based Model
 **Stanislav Melnikov**
