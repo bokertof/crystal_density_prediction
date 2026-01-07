@@ -5,15 +5,4 @@ dill
 rdkit
 molvs
 torch==1.11.0
-torchtext==0.6.0
-
-
-
-
-
-
-
-
-
-
-
+torch==1.11.1+cu117
