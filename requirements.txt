@@ -1,6 +1,6 @@
 streamlit
 torch
-rdkit-pypi
+rdkit
 PyYAML
 random
 tokenizer
