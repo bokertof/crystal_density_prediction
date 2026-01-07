@@ -25,6 +25,17 @@ for checkpoint in config["model_names"]:
 st.title("Crystal Density Predictor")
 st.write("Enter one or more SMILES strings (one per line) to predict crystal density.")
 
+tta_number = st.slider(
+    "Test-Time Augmentation (number of random SMILES)",
+    min_value=1,
+    max_value=50,
+    value=config["TTA_number"],
+    step=1
+)
+
+if tta_number > 20:
+    st.info("High TTA values improve stability but increase inference time.")
+
 smiles_input = st.text_area("SMILES strings", height=200)
 
 if st.button("Predict"):
