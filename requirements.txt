@@ -4,5 +4,5 @@ pyyaml
 dill
 rdkit
 molvs
-torch==1.11.0
-torch==1.11.1+cu117
+torch+cu117
+
