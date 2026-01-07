@@ -5,7 +5,7 @@ from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 config = load_config("config.yaml")
 SMILES = load_dict(config["tokens_dict_name"])
