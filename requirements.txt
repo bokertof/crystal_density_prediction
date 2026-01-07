@@ -1,8 +1,7 @@
 streamlit
-numpy=1.20.3=py37hcbcd69c_1
-pandas=1.2.4=py37h90003fb_0
-pyyaml=5.4.1=py37hcc03f2d_0
-rdkit=2021.03.2=py37hbb9c5dc_0
-yaml=0.2.5=he774522_0
--f https://data.pyg.org/whl/torch-1.13.0+cpu.html 
-torch-scatter
+numpy==1.20.3
+pandas==1.2.4
+pyyaml==5.4.1
+rdkit==2021.03.2
+PyYAML==0.2.5
+torch-scatter @ https://data.pyg.org/whl/torch-1.13.0+cpu.html
