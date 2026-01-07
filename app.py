@@ -16,7 +16,7 @@ models = []
 for checkpoint in config["model_names"]:
     model = RNN(input_size, embedd_size, config["hidden_size"], config["num_layers"],
                 device, config["bidirect"]).to(device)
-    model.load_state_dict(torch.load(checkpoint)['state_dict'], map_location=device)
+    model.load_state_dict(torch.load(checkpoint, map_location=device)['state_dict'])
     model.eval()
     models.append(model)
     print(checkpoint.split('/')[-1], ' loaded')
