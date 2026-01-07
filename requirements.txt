@@ -1,6 +1,7 @@
 streamlit
 torch
 rdkit
-PyYAML
+yaml
 random
 tokenizer
+
