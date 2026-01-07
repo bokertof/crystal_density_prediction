@@ -49,6 +49,7 @@ if st.button("Predict"):
                         index += preds.shape[0]
 
         aver_preds /= (len(models) * config["TTA_number"])
+        preds = aver_preds.view(-1).tolist()
 
-        for smi, pred in zip(data_smiles, aver_preds.squeeze().tolist()):
+        for smi, pred in zip(data_smiles, preds):
             st.write(f"**SMILES:** {smi} → **Predicted density:** {pred:.4f}")
