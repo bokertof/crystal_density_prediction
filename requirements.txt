@@ -1,8 +1,10 @@
+git+https://github.com/bokertof/Tokenizer
 streamlit
 pyyaml
 dill
 rdkit
 torch==1.11.0
+
 
 
 
