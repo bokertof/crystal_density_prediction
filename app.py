@@ -46,7 +46,7 @@ if tta_number > 20:
     st.info("High TTA values improve stability but increase inference time.")
 
 
-example_smiles = """[O-][N+](=O)C12C3([N+]([O-])=O)C4([N+]([O-])=O)C1([N+]([O-])=O)C5([N+]([O-])=O)C2([N+]([O-])=O)C3([N+]([O-])=O)C45[N+]([O-])=O
+example_smiles = """c1ccc2cc3ccccc3cc2c1
 Cc1c(cc(cc1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]
 c1(Cl)c(Cl)c(Cl)c(Cl)c(Cl)c1Cl
 """
