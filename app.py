@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
-import ChemTokenizer
+from tokenizer import ChemTokenizer
 
 device = torch.device("cpu")
 
