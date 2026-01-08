@@ -45,7 +45,6 @@ tta_number = st.slider(
 if tta_number > 20:
     st.info("High TTA values improve stability but increase inference time.")
 
-smiles_input = st.text_area("SMILES strings", height=200)
 
 example_smiles = """[O-][N+](=O)C12C3([N+]([O-])=O)C4([N+]([O-])=O)C1([N+]([O-])=O)C5([N+]([O-])=O)C2([N+]([O-])=O)C3([N+]([O-])=O)C45[N+]([O-])=O
 Cc1c(cc(cc1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]
