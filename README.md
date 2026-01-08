@@ -109,6 +109,7 @@ Errors below 0.03 g cm⁻³ are considered “excellent” according to Kim et. 
 For model results, values are reported as MAE / RMSE / R² (top → bottom)*
 
 # Accessibility
+The datasets used in this project can be obtained after direct inquiry if needed.
 The environment of the project can be readily built from the density.yml file:
 
 ```
