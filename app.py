@@ -32,8 +32,10 @@ models = load_models()
 
 st.set_page_config(
     page_title="Crystal Density Predictor",
-    page_icon=":material/analytics:",
+    page_icon=":material/diamond:",
 )
+
+st.title("💠Crystal Density Predictor💠")
 
 st.write("Enter one or more SMILES strings (one per line) to predict crystal density.")
 
