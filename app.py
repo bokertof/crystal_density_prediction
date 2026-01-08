@@ -30,8 +30,11 @@ def load_models():
 
 models = load_models()
 
+st.set_page_config(
+    page_title="Crystal Density Predictor",
+    page_icon=":material/analytics:",
+)
 
-st.title("Crystal Density Predictor")
 st.write("Enter one or more SMILES strings (one per line) to predict crystal density.")
 
 tta_number = st.slider(
