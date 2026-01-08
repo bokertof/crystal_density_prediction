@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader
 from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
+import ChemTokenizer
 
 device = torch.device("cpu")
 
@@ -70,11 +71,11 @@ if st.button("Predict"):
         valid_smiles = []
 
         for smi in data_smiles:
-            unknown_tokens = {ch for ch in smi if ch not in allowed_tokens}
-        if unknown_tokens:
-            invalid_smiles.append((smi, unknown_tokens))
-        else:
-            valid_smiles.append(smi)
+            try:
+                tokens = ChemTokenizer.tokenize(smi)
+            except Exception as e:
+                invalid_smiles.append(smi)
+
         if invalid_smiles:
             st.warning("⚠️ **Some SMILES were skipped**")
             st.info("✅ **Allowed tokens in this model:**\n\n"+ ", ".join(sorted(allowed_tokens)))
