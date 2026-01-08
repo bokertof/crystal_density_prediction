@@ -61,6 +61,8 @@ smiles_input = st.text_area(
     key="smiles_input"
 )
 
+ChemTokenizer = ChemTokenizer()
+
 if st.button("Predict"):
     if not smiles_input.strip():
         st.warning("Please enter at least one SMILES string.")
@@ -72,7 +74,7 @@ if st.button("Predict"):
 
         for smi in data_smiles:
             try:
-                tokens = ChemTokenizer.tokenize(smi)
+                tokens = ChemTokenizer.tokenize([smi])[0]
             except Exception as e:
                 invalid_smiles.append(smi)
 
