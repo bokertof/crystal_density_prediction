@@ -9,7 +9,7 @@ device = torch.device("cpu")
 
 config = load_config("config.yaml")
 SMILES = load_dict(config["tokens_dict_name"])
-allowed_tokens = set(SMILES.vocab.stoi.keys())
+
 input_size = embedd_size = len(SMILES.vocab.stoi.items())
 
 @st.cache_resource
@@ -59,8 +59,6 @@ smiles_input = st.text_area(
     height=200,
     key="smiles_input"
 )
-
-ChemTokenizer = ChemTokenizer()
 
 if st.button("Predict"):
     if not smiles_input.strip():
