@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader
 from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
+from rdkit import Chem
 
 device = torch.device("cpu")
 
@@ -65,6 +66,20 @@ if st.button("Predict"):
         st.warning("Please enter at least one SMILES string.")
     else:
         data_smiles = [line.strip() for line in smiles_input.split("\n") if line.strip()]
+
+        invalid_smiles = []
+        valid_smiles = []
+
+        for smi in data_smiles:
+            mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            invalid_smiles.append(smi)
+        else:
+            valid_smiles.append(smi)
+
+        if len(valid_smiles) < len(data_smiles):
+            st.warning(f"⚠️ {len(data_smiles) - len(valid_smiles)} invalid SMILES were ignored.")
+        
         dataset_smiles = infDENSDataset(data_smiles, SMILES)
         dataloader = DataLoader(dataset_smiles,
                                 batch_size=config["inference_BATCH_SIZE"],
