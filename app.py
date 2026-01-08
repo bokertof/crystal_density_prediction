@@ -79,7 +79,9 @@ if st.button("Predict"):
 
         if len(valid_smiles) < len(data_smiles):
             st.warning(f"⚠️ {len(data_smiles) - len(valid_smiles)} invalid SMILES were ignored.")
-        
+
+        data_smiles = valid_smiles
+
         dataset_smiles = infDENSDataset(data_smiles, SMILES)
         dataloader = DataLoader(dataset_smiles,
                                 batch_size=config["inference_BATCH_SIZE"],
