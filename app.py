@@ -4,13 +4,12 @@ from torch.utils.data import DataLoader
 from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
-from rdkit import Chem
 
 device = torch.device("cpu")
 
 config = load_config("config.yaml")
 SMILES = load_dict(config["tokens_dict_name"])
-
+allowed_tokens = set(SMILES.vocab.stoi.keys())
 input_size = embedd_size = len(SMILES.vocab.stoi.items())
 
 @st.cache_resource
@@ -71,15 +70,15 @@ if st.button("Predict"):
         valid_smiles = []
 
         for smi in data_smiles:
-            mol = Chem.MolFromSmiles(smi)
-        if mol is None:
-            invalid_smiles.append(smi)
+            unknown_tokens = {ch for ch in smi if ch not in allowed_tokens}
+        if unknown_tokens:
+            invalid_smiles.append((smi, unknown_tokens))
         else:
             valid_smiles.append(smi)
-
-        if len(valid_smiles) < len(data_smiles):
-            st.warning(f"⚠️ {len(data_smiles) - len(valid_smiles)} invalid SMILES were ignored.")
-
+        if invalid_smiles:
+            st.warning("⚠️ **Some SMILES were skipped**")
+            st.info("✅ **Allowed tokens in this model:**\n\n"+ ", ".join(sorted(allowed_tokens)))
+        
         data_smiles = valid_smiles
 
         dataset_smiles = infDENSDataset(data_smiles, SMILES)
