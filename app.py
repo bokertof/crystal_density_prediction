@@ -4,7 +4,6 @@ from torch.utils.data import DataLoader
 from functions import load_config, load_dict
 from data_structures import infDENSDataset
 from model import RNN
-from tokenizer import ChemTokenizer
 
 device = torch.device("cpu")
 
@@ -68,23 +67,6 @@ if st.button("Predict"):
         st.warning("Please enter at least one SMILES string.")
     else:
         data_smiles = [line.strip() for line in smiles_input.split("\n") if line.strip()]
-
-        invalid_smiles = []
-        valid_smiles = []
-        print(ChemTokenizer.tokenize(data_smiles[0]))
-        print(ChemTokenizer.tokenize(data_smiles[0])[0])
-        print(ChemTokenizer.tokenize([data_smiles[0]])[0])
-        for smi in data_smiles:
-            try:
-                tokens = ChemTokenizer.tokenize([smi])[0]
-            except Exception as e:
-                invalid_smiles.append(smi)
-
-        if invalid_smiles:
-            st.warning("⚠️ **Some SMILES were skipped**")
-            st.info("✅ **Allowed tokens in this model:**\n\n"+ ", ".join(sorted(allowed_tokens)))
-        
-        data_smiles = valid_smiles
 
         dataset_smiles = infDENSDataset(data_smiles, SMILES)
         dataloader = DataLoader(dataset_smiles,
