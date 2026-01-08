@@ -71,7 +71,9 @@ if st.button("Predict"):
 
         invalid_smiles = []
         valid_smiles = []
-
+        print(ChemTokenizer.tokenize(data_smiles[0]))
+        print(ChemTokenizer.tokenize(data_smiles[0])[0])
+        print(ChemTokenizer.tokenize([data_smiles[0]])[0])
         for smi in data_smiles:
             try:
                 tokens = ChemTokenizer.tokenize([smi])[0]
