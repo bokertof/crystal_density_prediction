@@ -47,6 +47,20 @@ if tta_number > 20:
 
 smiles_input = st.text_area("SMILES strings", height=200)
 
+example_smiles = """[O-][N+](=O)C12C3([N+]([O-])=O)C4([N+]([O-])=O)C1([N+]([O-])=O)C5([N+]([O-])=O)C2([N+]([O-])=O)C3([N+]([O-])=O)C45[N+]([O-])=O
+Cc1c(cc(cc1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]
+c1(Cl)c(Cl)c(Cl)c(Cl)c(Cl)c1Cl
+"""
+
+if st.button("🧪 Load example SMILES"):
+    st.session_state["smiles_input"] = example_smiles
+
+smiles_input = st.text_area(
+    "SMILES strings",
+    height=200,
+    key="smiles_input"
+)
+
 if st.button("Predict"):
     if not smiles_input.strip():
         st.warning("Please enter at least one SMILES string.")
