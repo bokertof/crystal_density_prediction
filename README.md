@@ -41,7 +41,7 @@ For additional testing, we used three smaller literature datasets: Huang & Massa
 *Summary of the datasets' statistics.*
 
 
- <img width="693" height="458" alt="image" src="https://github.com/user-attachments/assets/63a2b2c5-802b-43d1-bf3e-f4a47a7ab529" />
+ <img width="393" height="258" alt="image" src="https://github.com/user-attachments/assets/63a2b2c5-802b-43d1-bf3e-f4a47a7ab529" />
 
 *Violin plots of paired Tanimoto similarity distributions among 2,000 random picked samples over 4 selected datasets. For Rice, Huang&Massa and Mathieu datasets all molecules were used for calculations.*
 
@@ -52,7 +52,7 @@ Matrices were fed into a 4-layer bidirectional GRU (hidden size = 128), with the
 
 During inference, test-time augmentation (TTA) averaged predictions over 30 randomized SMILES per molecule. Bootstrap experiments were performed by resampling datasets of equal size for ensemble evaluation.
 
-<img width="2002" height="1350" alt="Picture5" src="https://github.com/user-attachments/assets/e8655a08-d772-4aea-b7f2-5b25dd950eb0" />
+<img width="602" height="350" alt="Picture5" src="https://github.com/user-attachments/assets/e8655a08-d772-4aea-b7f2-5b25dd950eb0" />
 
 *The model architecture. Molecules in RandomSMILES representations are fed by neural network. It includes 4-layer bidirectional GRU with attached feed-forward layer. The size of one-hot vectors depends on the dataset used for training. In the case of CCDC all size = 111, size = 33 for CCDC CHNO and size = 22 for Casey*
 
@@ -78,7 +78,7 @@ The largest observed density differences among polymorphs reach 0.19 g cm⁻³ f
 To assess the benefit of randomized SMILES, we first trained our GRU-based model on canonical SMILES from the CCDC dataset. Even with canonical representations, the model achieved strong performance on crystal density prediction for the test set. For this experiment, we adjusted the training hyperparameters, as the default settings (n_epochs = 500, step_size = 10) led to unstable training and poor convergence. Reducing them to n_epochs = 250 and step_size = 5 stabilized learning and prevented gradient issues. The training curve (see the report file) shows pronounced overfitting, consistent with previously reported observations for models trained on canonical SMILES.
 Errors below 0.03 g cm⁻³ are considered “excellent” according to Kim et. al. Using this criterion, our model achieves excellent accuracy for 74% of the training set and 61% of the val CCDC set.
 
-<img width="757" height="485" alt="image" src="https://github.com/user-attachments/assets/14b548fc-4310-42ea-b545-2b8c250aebd4" />
+<img width="500" height="285" alt="image" src="https://github.com/user-attachments/assets/14b548fc-4310-42ea-b545-2b8c250aebd4" />
 
 *The average Mean Absolute Error vs number of test-time augmentations. Calculations were performed 5 times on CCDC test subset.*
 
