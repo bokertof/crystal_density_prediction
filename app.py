@@ -1,3 +1,17 @@
+import sys
+import types
+
+class DummyField:
+    def __init__(self, *args, **kwargs):
+        pass
+
+for mod_name in ["torchtext.data", "torchtext.data.field"]:
+    if mod_name not in sys.modules:
+        m = types.ModuleType(mod_name)
+        m.Field = DummyField
+        sys.modules[mod_name] = m
+
+
 import streamlit as st
 import torch
 from torch.utils.data import DataLoader
