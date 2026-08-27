@@ -1,9 +1,10 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch>=2.0.0+cpu
-torchtext
+torch==2.0.1+cpu
+torchtext==0.15.2
 git+https://github.com/bokertof/ChemTokenizer
 streamlit
 pyyaml
 dill
 rdkit
 molvs
+
